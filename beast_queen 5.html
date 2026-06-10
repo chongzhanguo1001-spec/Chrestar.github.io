@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrestar 靈魂加冕：Beast Queen 正在為你戴上面具</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel & Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #030105;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050209;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a0835;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a21caf;
+        }
+        /* Corrupted Dark Magic Glows */
+        .glow-purple {
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.7), 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+        .glow-green {
+            text-shadow: 0 0 10px rgba(34, 197, 94, 0.7), 0 0 20px rgba(34, 197, 94, 0.4);
+        }
+        .glow-crimson {
+            text-shadow: 0 0 10px rgba(220, 38, 38, 0.7), 0 0 20px rgba(220, 38, 38, 0.4);
+        }
+        .glow-beast {
+            text-shadow: 0 0 15px rgba(236, 72, 153, 0.8), 0 0 30px rgba(219, 39, 119, 0.5);
+        }
+        /* Background Drift Animation */
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+            50% { transform: translate(3%, 4%) scale(1.15); opacity: 0.6; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+        }
+        .bg-drift {
+            animation: drift 20s ease-in-out infinite;
+        }
+        /* Pulse Animation for Queen's gaze */
+        @keyframes gaze-pulse {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(219, 39, 119, 0.4)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 25px rgba(219, 39, 119, 0.9)); transform: scale(1.02); }
+        }
+        .pulse-gaze {
+            animation: gaze-pulse 3s ease-in-out infinite;
+        }
+        /* Glitch style transition */
+        @keyframes crack {
+            0% { clip-path: inset(20% 0 50% 0); transform: skew(0.5deg); }
+            10% { clip-path: inset(80% 0 5% 0); transform: skew(-1deg); }
+            20% { clip-path: inset(10% 0 70% 0); transform: skew(1.5deg); }
+            30% { clip-path: inset(60% 0 15% 0); transform: skew(-0.5deg); }
+            40% { clip-path: inset(5% 0 90% 0); transform: skew(1deg); }
+            50% { clip-path: inset(0 0 0 0); transform: skew(0); }
+        }
+        .glitch-effect {
+            animation: crack 0.5s linear infinite;
+        }
+        /* Mask bounce animation */
+        @keyframes hoverMask {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+        .hover-mask {
+            animation: hoverMask 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between selection:bg-pink-900 selection:text-pink-200">
+
+    <!-- Background Space & Ambient Effects -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <!-- Core vignette with deep violet & crimson overlay -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(35,5,53,0.9),rgba(3,1,5,1))]"></div>
+        <!-- Corrupted magic flow -->
+        <div class="absolute -top-[30%] -left-[20%] w-[150%] h-[150%] bg-[radial-gradient(circle_at_30%_30%,rgba(219,39,119,0.12),transparent_60%)] bg-drift"></div>
+        <div class="absolute -bottom-[30%] -right-[20%] w-[150%] h-[150%] bg-[radial-gradient(circle_at_75%_75%,rgba(147,51,234,0.12),transparent_60%)] bg-drift" style="animation-delay: -10s;"></div>
+        <!-- Fine star-grid representing Chrestar's magical barrier under stress -->
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:30px_30px] opacity-30"></div>
+    </div>
+
+    <!-- Top Navigation & Controls -->
+    <header class="relative z-50 w-full px-6 py-4 flex justify-between items-center bg-black/40 backdrop-blur-md border-b border-purple-950/40">
+        <div class="flex items-center gap-3">
+            <span class="font-cinzel font-bold text-lg tracking-widest text-pink-500 glow-beast">CHRESTAR</span>
+            <span class="text-xs bg-pink-950/60 border border-pink-700/30 px-2 py-0.5 rounded text-pink-300">Guardians VS Beast Queen</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <!-- Full mask index gallery button -->
+            <button onclick="toggleGallery()" class="text-gray-400 hover:text-pink-400 text-xs tracking-wider uppercase transition-all flex items-center gap-2">
+                <i class="fa-solid fa-masks-theater text-sm"></i>
+                <span class="hidden sm:inline">面具全圖鑑</span>
+            </button>
+            <!-- Audio Toggle button -->
+            <button id="audio-toggle" onclick="toggleAudio()" class="bg-purple-950/40 hover:bg-pink-950/40 border border-purple-900/40 hover:border-pink-500/80 text-gray-400 hover:text-pink-400 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase transition-all duration-300 flex items-center gap-2">
+                <span id="audio-icon" class="inline-block w-2 h-2 rounded-full bg-gray-600 animate-pulse"></span>
+                <span id="audio-text">開啟女王低語</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <main class="relative z-10 flex-grow flex flex-col justify-center items-center px-4 py-8 max-w-4xl mx-auto w-full">
+
+        <!-- VIEW 1: LANDING PAGE -->
+        <div id="view-landing" class="w-full text-center py-6 flex flex-col items-center justify-center transition-all duration-700 ease-out">
+            <div class="mb-6 relative">
+                <!-- Glowing central mystery mask placeholder (corrupted crown) -->
+                <div class="absolute -inset-6 bg-pink-600/10 rounded-full blur-2xl animate-pulse"></div>
+                <!-- Dark beast claws/crown SVG -->
+                <svg class="w-32 h-32 mx-auto text-pink-600 pulse-gaze" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.6" d="M12 2L2 9l10 5 10-5-10-7z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.6" d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+                    <circle cx="12" cy="12" r="3" stroke="#db2777" stroke-width="1" fill="#1e1b4b" fill-opacity="0.5"/>
+                    <path d="M9 12h.01M15 12h.01M12 15h.01" stroke="#ec4899" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            
+            <h1 class="font-cinzel text-3xl md:text-5xl font-black tracking-widest mb-2 text-pink-500 glow-beast">
+                BEAST QUEEN 正在為你戴上面具
+            </h1>
+            <p class="font-cinzel text-sm md:text-base tracking-[0.25em] uppercase text-purple-300 mb-6">
+                Guardians of Chrestar: Mask Ceremony
+            </p>
+
+            <div class="max-w-xl mx-auto mb-8 space-y-4 text-gray-300">
+                <p class="text-base md:text-lg leading-relaxed font-light">
+                    「可憐的 Chrestar ……你們敢直視自己的深淵嗎？」
+                </p>
+                <div class="bg-black/50 border border-pink-950/50 p-4 rounded-xl text-xs md:text-sm text-gray-400 italic space-y-2">
+                    <p class="text-pink-300/90 font-semibold">【Beast Queen 降臨】</p>
+                    <p>
+                        我是黑暗的主宰，群獸與陰影的化身。Chrestar 終將被我摧毀，而你靈魂底層最真實的渴望、脆弱、傲慢與恐懼，早已在九型人格的命運軌跡中呼之欲出。<br>
+                        回答我的 9 個試煉之問。我將親自剝下你的偽裝，為你扣上那張最契合你的——【面具】。
+                    </p>
+                </div>
+            </div>
+
+            <button onclick="startQuiz()" class="group relative px-10 py-4 bg-gradient-to-r from-pink-950/90 via-purple-950/70 to-pink-950/90 border border-pink-500/50 hover:border-pink-500 rounded-lg text-pink-200 font-bold tracking-[0.25em] text-lg hover:text-white transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(219,39,119,0.2)] hover:shadow-[0_0_35px_rgba(219,39,119,0.5)] overflow-hidden">
+                <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></span>
+                接受女王的試煉
+            </button>
+            
+            <p class="text-[10px] text-gray-600 mt-6 tracking-widest uppercase flex items-center gap-2">
+                <i class="fa-solid fa-volume-high text-pink-900"></i> 建議開啟聲音，聆聽來自 Chrestar 陰影處的低語
+            </p>
+        </div>
+
+        <!-- VIEW 2: QUIZ COMPONENT -->
+        <div id="view-quiz" class="hidden w-full max-w-2xl bg-black/60 border border-purple-950/50 rounded-2xl p-6 md:p-10 backdrop-blur-md shadow-2xl transition-all duration-500 transform scale-95 opacity-0">
+            <!-- Progress & Header -->
+            <div class="flex justify-between items-center mb-6 border-b border-purple-950/40 pb-4">
+                <span class="text-xs uppercase tracking-widest text-pink-500 font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles animate-spin" style="animation-duration: 3s"></i>
+                    魔力障壁滲透中
+                </span>
+                <span id="quiz-progress" class="font-cinzel text-sm text-gray-400 font-semibold">Q 1 / 9</span>
+            </div>
+
+            <!-- Question text -->
+            <h2 id="quiz-question" class="text-lg md:text-xl font-bold tracking-wide text-gray-100 mb-8 leading-relaxed">
+                正在引導 Chrestar 戰役場景...
+            </h2>
+
+            <!-- Answer Options -->
+            <div id="quiz-options" class="space-y-3.5">
+                <!-- Dynamically Generated Options -->
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="mt-8">
+                <div class="flex justify-between text-[11px] text-purple-400 mb-2 tracking-widest">
+                    <span>堅守光明</span>
+                    <span>投入女王的懷抱</span>
+                </div>
+                <div class="w-full bg-gray-950 h-[3px] rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-gradient-to-r from-purple-900 to-pink-600 h-full w-[11%] transition-all duration-500"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 3: FITTING TRANSITION ANIMATION -->
+        <div id="view-fitting" class="hidden w-full flex-col items-center justify-center py-12 transition-all duration-500 transform scale-95 opacity-0 text-center">
+            <div class="relative w-64 h-64 mb-8 flex items-center justify-center">
+                <!-- Concentric spinning magic circles -->
+                <div class="absolute inset-0 border border-dashed border-pink-500/20 rounded-full animate-[spin_25s_linear_infinite]"></div>
+                <div class="absolute inset-4 border border-purple-500/15 rounded-full animate-[spin_12s_linear_infinite_reverse]"></div>
+                <div class="absolute inset-8 bg-pink-950/10 rounded-full blur-3xl"></div>
+                
+                <!-- The falling mask shadow -->
+                <div id="fitting-mask-container" class="absolute w-48 h-48 text-pink-500/70 hover-mask transition-all duration-[3000ms] transform translate-y-[-50px] opacity-0 scale-75 flex items-center justify-center">
+                    <i class="fa-solid fa-masks-theater text-8xl text-pink-600/30 animate-pulse"></i>
+                </div>
+            </div>
+
+            <div class="space-y-4 max-w-md">
+                <h3 class="font-cinzel text-xl md:text-2xl font-bold tracking-[0.2em] text-pink-500 glow-beast animate-pulse">
+                    FITTING THE CORRUPTED MASK...
+                </h3>
+                <p id="fitting-subtext" class="text-sm text-gray-400 italic font-light min-h-[40px] px-4 leading-relaxed">
+                    「讓黑暗與你的靈魂共生……」
+                </p>
+                <div class="flex justify-center gap-1.5 pt-2">
+                    <span class="w-1.5 h-1.5 bg-pink-600 rounded-full animate-bounce" style="animation-delay: 0.1s"></span>
+                    <span class="w-1.5 h-1.5 bg-pink-600 rounded-full animate-bounce" style="animation-delay: 0.3s"></span>
+                    <span class="w-1.5 h-1.5 bg-pink-600 rounded-full animate-bounce" style="animation-delay: 0.5s"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 4: REVEAL / RESULT PAGE -->
+        <div id="view-result" class="hidden w-full max-w-3xl bg-black/60 border border-pink-950/50 rounded-2xl overflow-hidden backdrop-blur-md shadow-2xl transition-all duration-700 transform scale-95 opacity-0">
+            <div class="relative p-6 md:p-10 flex flex-col items-center text-center">
+                
+                <div class="absolute top-4 left-6 text-[10px] font-cinzel text-pink-400/80 tracking-[0.3em] uppercase flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 bg-pink-500 rounded-full animate-ping"></span>
+                    Beast Crown Ceremony // 女王面具加冕
+                </div>
+
+                <!-- Animated Reveal Mask Display -->
+                <div class="relative w-64 h-64 mb-6 flex items-center justify-center">
+                    <div id="result-glow" class="absolute inset-0 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                    <div id="result-mask-render" class="w-56 h-56 relative z-10 flex items-center justify-center">
+                        <!-- Dynamic mask injected here -->
+                    </div>
+                </div>
+
+                <!-- Title & Name -->
+                <div class="mb-5">
+                    <span id="result-enneagram" class="text-xs uppercase tracking-[0.3em] text-pink-400 font-semibold">九型人格對應</span>
+                    <h2 id="result-title" class="font-cinzel text-3xl md:text-4xl font-black tracking-widest mt-2 mb-1 text-pink-500">
+                        <!-- Title dynamically injected -->
+                    </h2>
+                    <div class="w-32 h-[1px] bg-gradient-to-r from-transparent via-pink-500 to-transparent mx-auto mt-3"></div>
+                </div>
+
+                <!-- Monologue / Story (THE BIG VILLAINOUS REVEAL) -->
+                <div class="bg-purple-950/20 border border-pink-950/50 rounded-xl p-5 md:p-7 max-w-xl mx-auto mb-6 relative">
+                    <!-- Dark Gothic corner decors -->
+                    <div class="absolute top-2 left-2 text-[10px] text-pink-800/40">⚡</div>
+                    <div class="absolute top-2 right-2 text-[10px] text-pink-800/40">⚡</div>
+                    <div class="absolute bottom-2 left-2 text-[10px] text-pink-800/40">⚡</div>
+                    <div class="absolute bottom-2 right-2 text-[10px] text-pink-800/40">⚡</div>
+
+                    <p id="result-monologue" class="text-xs md:text-sm text-gray-300 leading-relaxed font-light italic whitespace-pre-wrap text-left font-mono">
+                        <!-- Monologue dynamically injected -->
+                    </p>
+                </div>
+
+                <!-- Analysis Details -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-xl text-left mb-8 text-xs">
+                    <div class="bg-black/40 p-4 border border-purple-950/40 rounded-lg">
+                        <span class="text-pink-400 tracking-wider font-semibold uppercase">面具魔力特質</span>
+                        <p id="result-essence" class="text-gray-300 mt-1 font-light leading-relaxed">
+                            <!-- Essence dynamic -->
+                        </p>
+                    </div>
+                    <div class="bg-black/40 p-4 border border-purple-950/40 rounded-lg">
+                        <span class="text-pink-400 tracking-wider font-semibold">Chrestar 命運糾葛</span>
+                        <p id="result-compatibility" class="text-gray-300 mt-1 font-light leading-relaxed">
+                            <!-- Compatibility dynamic -->
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Actions / Controls -->
+                <div class="flex flex-col sm:flex-row gap-3 justify-center w-full max-w-md">
+                    <button onclick="copyResult()" class="flex-1 py-3 px-5 bg-gradient-to-r from-purple-950/60 to-purple-900/60 hover:from-purple-900/80 hover:to-purple-800/80 border border-purple-900/50 hover:border-pink-500 text-gray-300 hover:text-white font-bold tracking-widest text-xs rounded-lg transition-all duration-300 transform hover:scale-[1.02]">
+                        宣讀野獸之誓
+                    </button>
+                    <button onclick="resetQuiz()" class="flex-1 py-3 px-5 bg-gradient-to-r from-pink-950/40 to-pink-900/40 hover:from-pink-900/60 hover:to-pink-800/60 border border-pink-900/40 hover:border-pink-500/60 text-pink-200 hover:text-white font-bold tracking-widest text-xs rounded-lg transition-all duration-300 transform hover:scale-[1.02]">
+                        重回試煉
+                    </button>
+                </div>
+
+                <!-- Toast Notification Container -->
+                <div id="toast" class="opacity-0 translate-y-2 pointer-events-none fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-purple-950/95 border border-pink-500/60 text-pink-200 px-6 py-2.5 rounded-full text-xs tracking-widest uppercase transition-all duration-500 z-50 shadow-[0_0_20px_rgba(219,39,119,0.3)]">
+                    面具誓約已寫入靈魂中
+                </div>
+            </div>
+        </div>
+
+        <!-- POPUP VIEW: ALL MASKS GALLERY -->
+        <div id="view-gallery" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+            <div class="bg-neutral-950 border border-purple-900/60 rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-y-auto p-6 md:p-8 relative">
+                <button onclick="toggleGallery()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="text-center mb-6">
+                    <h3 class="font-cinzel text-2xl font-black text-pink-500 glow-beast">面具聖壇</h3>
+                    <p class="text-xs text-purple-300 tracking-widest uppercase mt-1">Guardians of Chrestar - Enneagram Collection</p>
+                </div>
+                <!-- Gallery Grid -->
+                <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <!-- Generated via JS -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 py-4 text-center text-[10px] text-purple-500/60 tracking-wider border-t border-purple-950/20">
+        <p>© 2026 Guardians of Chrestar by 趙小鳳. All Rights Reserved.</p>
+        <p class="mt-0.5">野獸女王 Beast Queen 魂魄印刻 // 心理測驗僅供小說互動娛樂</p>
+    </footer>
+
+    <script>
+        // Web Audio API Setup
+        let audioCtx = null;
+        let ambientOsc = null;
+        let ambientGain = null;
+        let isAudioPlaying = false;
+
+        function initAudio() {
+            try {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            } catch(e) {
+                console.warn("Web Audio API not supported in this browser.");
+            }
+        }
+
+        function playHeartbeat() {
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            const playThump = (time, pitch, duration) => {
+                let osc = audioCtx.createOscillator();
+                let gainNode = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(pitch, time);
+                osc.frequency.exponentialRampToValueAtTime(0.01, time + duration);
+                
+                gainNode.gain.setValueAtTime(0.4, time);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, time + duration);
+                
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.start(time);
+                osc.stop(time + duration);
+            };
+
+            const now = audioCtx.currentTime;
+            playThump(now, 52, 0.28);
+            playThump(now + 0.16, 44, 0.24);
+        }
+
+        function playClickSound() {
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            let osc = audioCtx.createOscillator();
+            let gainNode = audioCtx.createGain();
+            
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(10, audioCtx.currentTime + 0.12);
+            
+            gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+            
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.12);
+        }
+
+        function playRevealSound() {
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            let osc = audioCtx.createOscillator();
+            let gainNode = audioCtx.createGain();
+            
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(35, audioCtx.currentTime);
+            osc.frequency.linearRampToValueAtTime(70, audioCtx.currentTime + 1.5);
+            osc.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 2.5);
+            
+            gainNode.gain.setValueAtTime(0.25, audioCtx.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 1.5);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 2.5);
+            
+            let filter = audioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(250, audioCtx.currentTime);
+            
+            osc.connect(filter);
+            filter.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 2.6);
+        }
+
+        function startAmbient() {
+            if (!audioCtx) initAudio();
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            ambientOsc = audioCtx.createOscillator();
+            ambientGain = audioCtx.createGain();
+            
+            ambientOsc.type = 'sine';
+            ambientOsc.frequency.setValueAtTime(45, audioCtx.currentTime); // low dark drone
+            
+            ambientGain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+            
+            ambientOsc.connect(ambientGain);
+            ambientGain.connect(audioCtx.destination);
+            
+            ambientOsc.start();
+        }
+
+        function stopAmbient() {
+            if (ambientOsc) {
+                try {
+                    ambientOsc.stop();
+                    ambientOsc.disconnect();
+                } catch(e) {}
+                ambientOsc = null;
+            }
+        }
+
+        function toggleAudio() {
+            const btnText = document.getElementById('audio-text');
+            const btnIcon = document.getElementById('audio-icon');
+            
+            if (!isAudioPlaying) {
+                startAmbient();
+                btnText.textContent = "魔咒吟唱中";
+                btnIcon.classList.remove('bg-gray-500');
+                btnIcon.classList.add('bg-pink-500');
+                isAudioPlaying = true;
+                playHeartbeat();
+            } else {
+                stopAmbient();
+                btnText.textContent = "開啟女王低語";
+                btnIcon.classList.remove('bg-pink-500');
+                btnIcon.classList.add('bg-gray-500');
+                isAudioPlaying = false;
+            }
+        }
+
+        const questions = [
+            {
+                q: "當 Beast Queen 的魔獸大軍圍攻 power tree，你發現有一道細小的裂痕正在擴散，你最直接的本能反應是？",
+                options: [
+                    { t: "「這不可原諒！」立即組織護衛隊，按照法典的防禦順序一絲不苟地修復，嚴厲斥責防守疏漏的守衛。", v: "1" },
+                    { t: "二話不說，立刻用自己的軀體與法力去堵住缺口，保護身後受傷、發抖的年輕新兵。", v: "2" },
+                    { t: "迅速估算局勢，在眾人慌亂中指揮反擊，心想：「這是我在護衛隊中證明自己無可替代的最佳時機！」", v: "3" },
+                    { t: "凝視著那道裂縫，感受到一種悽美而不可抗拒的毀滅感，默默握緊古老武器，準備迎接一場孤高的謝幕。", v: "4" }
+                ]
+            },
+            {
+                q: "護衛隊即將前往 Chrestar 幽暗地帶執行刺殺魔獸首領的任務，你需要帶走一件象徵你核心追求的魔法器物：",
+                options: [
+                    { t: "古老的禁咒秘典。唯有洞悉 Beast Queen 的魔法公式與弱點，才能冷靜無誤地實施克制。", v: "5" },
+                    { t: "護衛隊誓約之徽。與隊友們緊密相隨、互相呼應，只有堅定信任彼此才能在黑暗中存活。", v: "6" },
+                    { t: "幻影傳送卷軸。能發現各種神奇古怪的新路徑，在冒險中總能找到最令人興奮的脫身妙計。", v: "7" },
+                    { t: "熔岩雙手重巨劍。不需要繁瑣的計謀，直接衝向獸群核心，用無人能擋的霸權力量將陰影砸碎！", v: "8" }
+                ]
+            },
+            {
+                q: "當任務失敗，大家在避難所中爆發激烈爭執、彼此猜忌時，你會採取什麼態度？",
+                options: [
+                    { t: "「爭吵毫無意義。」安撫大家的焦慮，尋求所有人都能接受的和平解決方案，化解緊張氣氛。", v: "9" },
+                    { t: "冷冰冰地列舉事實與條例，指出每個人的具體操作失誤，確保下次任務嚴格執行標準程序。", v: "1" },
+                    { t: "主動承擔安慰所有人的角色，細心照料受傷同伴的心理，好讓大家覺得你是最溫暖的靠山。", v: "2" },
+                    { t: "「吵夠了沒有？」冷哼一聲，一個人坐在最黑暗的角落裡，默默擦拭配劍，覺得他們都庸俗得無可救藥。", v: "4" }
+                ]
+            },
+            {
+                q: "如果 Beast Queen 通過心靈感應對你低語，試圖誘惑你加入她的黑暗陣營，她開出的哪一個條件最能擊中你的防線？",
+                options: [
+                    { t: "「加入我，我能讓你擁有絕對的力量與領地，再也沒有任何人可以掌控你、威脅你！」", v: "8" },
+                    { t: "「我可以給你無限的真理，解開 Chrestar 世界最深奧的創世神祕，滿足你對知性的追求。」", v: "5" },
+                    { t: "「這裡沒有規則、沒有繁重的教義。跟我來，你可以隨心所欲地體驗世間所有的樂趣與狂熱！」", v: "7" },
+                    { t: "「在這裡，沒人會再要求你壓抑自我、迎合他人，你就是最獨特、最無二的陰暗之花。」", v: "4" }
+                ]
+            },
+            {
+                q: "Chrestar 的「守護聖燈」在夜裡突然熄滅，黑暗侵蝕守衛塔。你最擔憂的事情是？",
+                options: [
+                    { t: "「這預示著集體防線的崩潰。」懷疑身邊是否有內奸，急切地想建立一個最穩定的應變機制。", v: "6" },
+                    { t: "自己的修為和決策被全盤否認，未能成為眾人矚目的最強護衛。", v: "3" },
+                    { t: "失去對局勢的分析與觀察力，陷入被黑暗吞噬的未知無知狀態。", v: "5" },
+                    { t: "純粹的混亂打亂了原本寧靜無爭的和平生活，逼迫自己不得不去面對劇烈的衝突。", v: "9" }
+                ]
+            },
+            {
+                q: "在一次對抗野獸魔兵的行動中，你的功績被上級指揮官據為己有，你會如何反應？",
+                options: [
+                    { t: "「他配不上這個位置。」直接私底下向更高層舉報其違規行為，或公然要求符合公正程序的審判。", v: "1" },
+                    { t: "「隨便吧，榮譽不過是虛妄之物。」只要世界依舊安寧，自己退居幕後默默守護也無妨。", v: "9" },
+                    { t: "在未來的戰場上用更驚艷的斬殺表現證明自己，讓士兵們只記住你這個真正耀眼的「第一守護者」。", v: "3" },
+                    { t: "絕不妥寫！直接在全軍演練或眾人面前撕破指揮官的虛偽面具，用絕對的強勢奪回屬於自己的主導權。", v: "8" }
+                ]
+            },
+            {
+                q: "當一隻年幼的小魔獸闖入守衛營地，並表現出極度恐懼與順從時，你會怎麼做？",
+                options: [
+                    { t: "悉心包紮它的傷口，餵它食物，堅信自己能以愛和溫柔感化黑暗之獸的血脈。", v: "2" },
+                    { t: "「太有意思了！」研究它的獨特行為，甚至想跟它建立一場精彩好玩、不拘一格的新冒險羈絆。", v: "7" },
+                    { t: "冷靜地將其隔離。在沒有完全分析出它的行為邏輯與威脅係數前，拒絕做出任何感性決定。", v: "5" },
+                    { t: "「這只是虛假的圈套。」謹慎戒備，召集同伴共同商討安全對策，防止這是 Beast Queen 的奸細。", v: "6" }
+                ]
+            },
+            {
+                q: "在 Chrestar 戰役中最艱難的防守歲月裡，你賴以支撐下去的內心信念是？",
+                options: [
+                    { t: "「如果我都垮了，那些需要我照顧的同伴們該怎麼辦？」", v: "2" },
+                    { t: "「只要我們遵守紀律、糾正錯誤、保持完美，正義必定會戰勝邪惡。」", v: "1" },
+                    { t: "「不論命運有多苦悶，我總能看到危機後的精彩希望，黎明一定會來！」", v: "7" },
+                    { t: "「與強大的 Beast Queen 交手是生命最狂熱的激勵。戰鬥，直到分出真正的強弱！」", v: "8" }
+                ]
+            },
+            {
+                q: "當戰爭結束，Chrestar 重歸平靜。你期望自己能在這個奇幻世界扮演怎樣的角色？",
+                options: [
+                    { t: "成為一位高尚、值得所有人尊敬的榮譽典範，指引後世避免再犯相同的秩序性錯誤。", v: "3" },
+                    { t: "退隱至靜謐的妖精森林，與世無爭，每天喝茶，維持與自然萬物的和諧相處。", v: "9" },
+                    { t: "守護最關鍵的安全體系與同盟，時時刻刻保持對潛在陰影的預警與防範。", v: "6" },
+                    { t: "獨自踏上無盡的未知疆界，用自己敏銳的雙眼記錄世界所有的隱秘知識與歷史真相。", v: "5" }
+                ]
+            }
+        ];
+
+        // Procedural Custom SVGs representing ALL types accurately in case files fail to load
+        const customMaskSVGs = {
+            "1": `<svg viewBox="0 0 100 100" fill="none" class="w-full h-full text-amber-500 drop-shadow-[0_0_15px_rgba(245,158,11,0.8)] hover-mask">
+                <defs>
+                    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f59e0b" />
+                        <stop offset="50%" stop-color="#b45309" />
+                        <stop offset="100%" stop-color="#78350f" />
+                    </linearGradient>
+                </defs>
+                <path d="M50,15 C55,8 65,5 75,10 C80,25 78,45 70,60 C62,75 55,85 50,90 C45,85 38,75 30,60 C22,45 20,25 25,10 C35,5 45,8 50,15 Z" fill="url(#goldGrad)" fill-opacity="0.9" stroke="#fbbf24" stroke-width="1.5"/>
+                <path d="M28,15 Q10,-5 5,12 Q15,18 26,16" fill="url(#goldGrad)" stroke="#fbbf24" stroke-width="1"/>
+                <path d="M72,15 Q90,-5 95,12 Q85,18 74,16" fill="url(#goldGrad)" stroke="#fbbf24" stroke-width="1"/>
+                <ellipse cx="38" cy="45" rx="8" ry="4" fill="#1e1b4b" stroke="#fef08a" stroke-width="1"/>
+                <ellipse cx="62" cy="45" rx="8" ry="4" fill="#1e1b4b" stroke="#fef08a" stroke-width="1"/>
+                <path d="M50,40 L50,65 L45,60 Z" fill="#fef08a"/>
+            </svg>`,
+            
+            "2": `<svg viewBox="0 0 100 100" fill="none" class="w-full h-full text-blue-400 drop-shadow-[0_0_15px_rgba(56,189,248,0.8)] hover-mask">
+                <defs>
+                    <linearGradient id="blueSpikeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#38bdf8" />
+                        <stop offset="50%" stop-color="#0284c7" />
+                        <stop offset="100%" stop-color="#0c4a6e" />
+                    </linearGradient>
+                </defs>
+                <circle cx="50" cy="50" r="35" fill="url(#blueSpikeGrad)" fill-opacity="0.9" stroke="#7dd3fc" stroke-width="2"/>
+                <path d="M15,50 L5,50 L20,40 M85,50 L95,50 L80,40 M50,15 L50,5 L40,20 M50,85 L50,95 L40,80" stroke="#7dd3fc" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="36" cy="50" r="10" fill="#022c22" stroke="#38bdf8" stroke-width="2"/>
+                <circle cx="64" cy="50" r="10" fill="#022c22" stroke="#38bdf8" stroke-width="2"/>
+                <circle cx="36" cy="50" r="6" fill="#38bdf8" opacity="0.7"/>
+                <circle cx="64" cy="50" r="6" fill="#38bdf8" opacity="0.7"/>
+                <rect x="44" y="48" width="12" height="4" fill="#38bdf8"/>
+            </svg>`,
+
+            "3": `<svg viewBox="0 0 100 100" fill="none" class="w-full h-full text-rose-500 drop-shadow-[0_0_15px_rgba(244,63,94,0.8)] hover-mask">
+                <defs>
+                    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f43f5e" />
+                        <stop offset="50%" stop-color="#be123c" />
+                        <stop offset="100%" stop-color="#4c0519" />
+                    </linearGradient>
+                </defs>
+                <path d="M50,10 C55,30 75,30 90,50 C70,55 70,75 50,90 C45,70 25,70 10,50 C30,45 30,25 50,10 Z" fill="url(#roseGrad)" fill-opacity="0.95" stroke="#fecdd3" stroke-width="1.5"/>
+                <path d="M25,50 Q50,30 75,50 Q50,70 25,50 Z" fill="#1e1b4b" stroke="#f43f5e" stroke-width="2"/>
+                <polygon points="32,44 37,50 42,42 47,50 52,42 57,50 62,42 67,46" fill="#fbbf24"/>
+                <polygon points="32,56 37,50 42,58 47,50 52,58 57,50 62,58 67,54" fill="#fbbf24"/>
+            </svg>`,
+
+            "4": `<svg viewBox="0 0 100 100" fill="none" class="w-full h-full text-purple-400 drop-shadow-[0_0_15px_rgba(168,85,247,0.8)] hover-mask">
+                <defs>
+                    <linearGradient id="purpleGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#c084fc" />
+                        <stop offset="50%" stop-color="#7e22ce" />
+                        <stop offset="100%" stop-color="#3b0764" />
+                    </linearGradient>
+                </defs>
+                <path d="M15,35 C20,20 35,15 50,22 C65,15 80,20 85,35 C88,48 80,75 50,90 C20,75 12,48 15,35 Z" fill="url(#purpleGlow)" fill-opacity="0.9" stroke="#d8b4fe" stroke-width="1.8"/>
+                <path d="M50,18 C44,18 40,24 40,30 C40,36 45,40 50,40 C46,38 44,34 44,30 C44,26 47,20 50,18 Z" fill="#fae8ff" opacity="0.95"/>
+                <path d="M26,48 Q34,44 38,50" stroke="#fae8ff" stroke-width="2" stroke-linecap="round"/>
+                <path d="M74,48 Q66,44 62,50" stroke="#fae8ff" stroke-width="2" stroke-linecap="round"/>
+                <path d="M30,52 L26,72 L32,68 M70,52 L74,72 L68,68" stroke="#a855f7" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M12,40 C5,45 2,55 5,65 M88,40 C95,45 98,55 95,65" stroke="#d8b4fe" stroke-width="1.2" stroke-dasharray="1 2"/>
+                <circle cx="50" cy="30" r="1.5" fill="#e9d5ff"/>
+            </svg>`,
+
+            "5": `<svg viewBox="0 0 100 100" fill="none" class="w-full h-full text-emerald-500 drop-shadow-[0_0_15px_rgba(16,185,129,0.8)] hover-mask">
+                <defs>
+                    <linearGradient id="stoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#10b981" />
+                        <stop offset="50%" stop-color="#047857" />
+                        <stop offset="100%" stop-color="#064e3b" />
+                    </linearGradient>
+                </defs>
+                <path d="M25,25 C35,15 65,15 75,25 C82,40 80,65 72,80 C65,90 35,90 28,80 C20,65 18,40 25,25 Z" fill="url(#stoneGrad)" fill-opacity="0.9" stroke="#6ee7b7" stroke-width="2"/>
+                <path d="M25,30 L40,35 L35,50 M75,40 L60,45 L65,60 M50,85 L52,70 L45,65" stroke="#6ee7b7" stroke-width="1" opacity="0.75"/>
+                <circle cx="38" cy="45" r="7" fill="#022c22" stroke="#10b981" stroke-width="1.5"/>
+                <circle cx="62" cy="45" r="7" fill="#022c22" stroke="#10b981" stroke-width="1.5"/>
+                <circle cx="38" cy="45" r="2.5" fill="#a7f3d0" class="animate-pulse"/>
+                <circle cx="62" cy="45" r="2.5" fill="#a7f3d0" class="animate-pulse"/>
+            </svg>`,
+
+            "6": `<svg viewBox="0 0 100 100" fill="none" class="w-full h-full text-teal-400 drop-shadow-[0_0_15px_rgba(45,212,191,0.8)] hover-mask">
+                <defs>
+                    <linearGradient id="ironGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#2dd4bf" />
+                        <stop offset="50%" stop-color="#0f766e" />
+                        <stop offset="100%" stop-color="#115e59" />
+                    </linearGradient>
+                </defs>
+                <path d="M30,35 C30,20 70,20 70,35 C70,55 65,75 50,85 C35,75 30,55 30,35 Z" fill="url(#ironGrad)" fill-opacity="0.95" stroke="#99f6e4" stroke-width="1.8"/>
+                <path d="M30,35 C15,30 5,45 12,60 C20,55 25,45 30,40" fill="url(#ironGrad)" stroke="#99f6e4" stroke-width="1"/>
+                <path d="M70,35 C85,30 95,45 88,60 C80,55 75,45 70,40" fill="url(#ironGrad)" stroke="#99f6e4" stroke-width="1"/>
+                <path d="M38,48 L62,48 L58,54 L42,54 Z" fill="#042f2e" stroke="#2dd4bf" stroke-width="1.5"/>
+                <line x1="50" y1="22" x2="50" y2="40" stroke="#99f6e4" stroke-width="2"/>
+            </svg>`,
+
+            "7": `<svg viewBox="0 0 100 100" fill="none" class="w-full h-full text-lime-500 drop-shadow-[0_0_15px_rgba(132,204,22,0.8)] hover-mask">
+                <defs>
+                    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#a3e635" />
+                        <stop offset="50%" stop-color="#4d7c0f" />
+                        <stop offset="100%" stop-color="#365314" />
+                    </linearGradient>
+                </defs>
+                <path d="M20,40 C20,25 35,20 50,25 C65,20 80,25 80,40 C80,60 70,75 50,85 C30,75 20,60 20,40 Z" fill="url(#leafGrad)" fill-opacity="0.9" stroke="#d9f99d" stroke-width="1.8"/>
+                <path d="M15,35 Q25,25 35,38 M85,35 Q75,25 65,38 M50,85 Q50,65 40,60" stroke="#a3e635" stroke-width="2" stroke-linecap="round"/>
+                <ellipse cx="38" cy="45" rx="7" ry="4" fill="#1a2e05" stroke="#d9f99d" stroke-width="1"/>
+                <ellipse cx="62" cy="45" rx="7" ry="4" fill="#1a2e05" stroke="#d9f99d" stroke-width="1"/>
+                <path d="M28,25 Q20,10 15,15 M72,25 Q80,10 85,15" stroke="#d9f99d" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>`,
+
+            "8": `<svg viewBox="0 0 100 100" fill="none" class="w-full h-full text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.8)] hover-mask">
+                <defs>
+                    <linearGradient id="fireGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#7f1d1d" />
+                        <stop offset="50%" stop-color="#b91c1c" />
+                        <stop offset="100%" stop-color="#f43f5e" />
+                    </linearGradient>
+                </defs>
+                <path d="M20,35 L12,12 L30,22 L50,8 L70,22 L88,12 L80,35 L84,65 L50,92 L16,65 Z" fill="url(#fireGrad)" fill-opacity="0.95" stroke="#fecdd3" stroke-width="2"/>
+                <polygon points="24,46 40,42 35,53" fill="#f43f5e" stroke="#ffe4e6" stroke-width="1"/>
+                <polygon points="76,46 60,42 65,53" fill="#f43f5e" stroke="#ffe4e6" stroke-width="1"/>
+                <path d="M50,8 L50,30 M30,22 L42,35 M70,22 L58,35" stroke="#f43f5e" stroke-width="1.5" opacity="0.8"/>
+                <path d="M28,60 L36,58 L34,68 M72,60 L64,58 L66,68" stroke="#fda4af" stroke-width="1.2"/>
+                <circle cx="50" cy="50" r="2.5" fill="#ffe4e6"/>
+                <path d="M40,75 Q50,82 60,75" stroke="#ef4444" stroke-width="2" fill="none"/>
+            </svg>`,
+
+            "9": `<svg viewBox="0 0 100 100" fill="none" class="w-full h-full text-cyan-500 drop-shadow-[0_0_15px_rgba(6,182,212,0.8)] hover-mask">
+                <defs>
+                    <linearGradient id="seaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#22d3ee" />
+                        <stop offset="50%" stop-color="#0891b2" />
+                        <stop offset="100%" stop-color="#0f172a" />
+                    </linearGradient>
+                </defs>
+                <path d="M25,40 C25,20 75,20 75,40 C75,55 70,70 50,80 C30,70 25,55 25,40 Z" fill="url(#seaGrad)" fill-opacity="0.9" stroke="#c2f3fc" stroke-width="1.8"/>
+                <path d="M30,65 Q20,80 25,95 M40,73 Q35,88 42,98 M60,73 Q65,88 58,98 M70,65 Q80,80 75,95" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"/>
+                <ellipse cx="38" cy="48" rx="8" ry="4" fill="#083344" stroke="#22d3ee" stroke-width="1.5"/>
+                <ellipse cx="62" cy="48" rx="8" ry="4" fill="#083344" stroke="#22d3ee" stroke-width="1.5"/>
+                <circle cx="38" cy="48" r="2" fill="#c2f3fc" class="animate-pulse"/>
+                <circle cx="62" cy="48" r="2" fill="#c2f3fc" class="animate-pulse"/>
+            </svg>`
+        };
+
+        const maskProfiles = {
+            "1": {
+                enneagram: "第 1 型 — 改革者 (Reformer)",
+                title: "秩序之角面具 (Horned Chimera Mask)",
+                image: "IMG_3322_3.jpg",
+                essence: "完美主義、公正法紀、燃燒內心批判的聖光。",
+                compatibility: "【命運盟友】：誓約鐵衛 (Type 6) | 【宿敵】：森羅幻夢 (Type 7)",
+                color: "text-amber-500 glow-gold",
+                accent: "rgba(245, 158, 11, 0.4)",
+                monologue: "「哼……你那緊皺的眉頭，出賣了你對這個世界不完美的憤怒。\n\n在 Chrestar 護衛隊中，你是不是也對隊友的懶散、敵人的卑劣感到無比痛苦？那些偽善的凡人以為逃避規則就是自由，卻不知道唯有鐵的紀律才能守住光明。Beast Queen 看得清清楚楚，你內心那把燃燒著公正與譴責的烈火。\n\n戴上這張『秩序之角面具』吧。從今往後，你不再需要壓抑你的評判。用你毫無瑕疵的冷酷法則，去重塑這片混亂的世界，把所有不合規矩的污穢，統統燒成焦土！」"
+            },
+            "2": {
+                enneagram: "第 2 型 — 助人者 (Helper)",
+                title: "幽藍晶刺面具 (Spiky Goggle Mask)",
+                image: "IMG_3325_3.jpg",
+                essence: "無私奉獻、防衛防禦、隱藏對愛與回報的極度渴望。",
+                compatibility: "【命運盟友】：深淵觸流 (Type 9) | 【宿敵】：霸王熔岩 (Type 8)",
+                color: "text-blue-400 glow-purple",
+                accent: "rgba(56, 189, 248, 0.4)",
+                monologue: "「呵呵，多麼善良、溫柔的靈魂啊。在戰火中，你永遠只看著別人，卻忘記了自己也在流血。\n\n你總是用晶藍色防禦面具隱藏內心空虛的恐懼，深怕同伴不再需要你、深怕自己不值得被愛。但 Beast Queen 知道你內心真正想要的——你需要他們對你感恩戴德，你需要成為他們唯一的救世主。\n\n戴上這張『幽藍晶刺面具』。那些幽藍的利刺將不再是防禦，而是你收服人心、索取回報的鎖鏈。去為他們療傷，然後，讓他們用一生的順從與崇拜，來償還你的恩典……」"
+            },
+            "3": {
+                enneagram: "第 3 型 — 成就者 (Achiever)",
+                title: "暴食荊棘面具 (Carnivorous Bloom Mask)",
+                image: "IMG_3321_3.jpg",
+                essence: "榮耀野心、渴望認可、如食人花般無止境的掠奪性生存。",
+                compatibility: "【命運盟友】：秩序之角 (Type 1) | 【宿敵】：悲歌幽羽 (Type 4)",
+                color: "text-rose-500 glow-crimson",
+                accent: "rgba(244, 63, 94, 0.4)",
+                monologue: "「哈哈！讓我聽聽，這顆滾燙的心臟，是多麼渴望站在萬眾矚目的守護者頂峰！\n\n對你來說，平庸比死更可怕，對吧？你用最完美的戰績包裝自己，只為贏得 Chrestar 那些庸俗之人的掌聲與喝采。但在 Beast Queen 眼裡，你不過是一個對榮譽無比飢渴的野心家。\n\n這具『暴食荊棘面具』上的每一顆利齒，都代表你對卓越的無盡貪婪。戴上它！去吞噬所有的競爭對手，踩在他們的白骨上登基。讓整個世界只傳頌你一個人的威名，你，就是唯一的傳奇！」"
+            },
+            "4": {
+                enneagram: "第 4 型 — 個人主義者 (Individualist)",
+                title: "悲歌幽羽面具 (Tragic Amethyst Mask)",
+                image: "custom_generated_4",
+                essence: "高孤絕美、藝術憂鬱、與世界格格不入的黑夜吟遊。",
+                compatibility: "【命運盟友】：裂紋石語 (Type 5) | 【宿敵】：暴食荊棘 (Type 3)",
+                color: "text-purple-400 glow-purple",
+                accent: "rgba(168, 85, 247, 0.4)",
+                monologue: "「你總是覺得，沒人能真正聽懂你靈魂的悲鳴，對不對？\n\n在光輝燦爛的 Chrestar 裡，你卻執意去品嚐痛苦、去追尋那抹最獨特的陰影。你抗拒與平庸的凡人同流合汙，甘願讓孤獨將自己包裹。這份悽美，唯有我的黑暗配得上你。\n\n這張『悲歌幽羽面具』是我為你獨創的靈魂結晶。戴上它，讓紫水晶凝聚的淚滴成為你的力量。去宣洩你的不甘與悽涼，在廢墟上唱響最優雅、最特立獨行的安魂曲……」"
+            },
+            "5": {
+                enneagram: "第 5 型 — 觀察者 (Investigator)",
+                title: "裂紋石語面具 (Cracked Stone Mask)",
+                image: "IMG_3323_3.jpg",
+                essence: "冰冷理性、精神孤立、收集古老禁忌知識的智慧壁壘。",
+                compatibility: "【命運盟友】：悲歌幽羽 (Type 4) | 【宿敵】：森羅幻夢 (Type 7)",
+                color: "text-emerald-500 glow-green",
+                accent: "rgba(16, 185, 129, 0.4)",
+                monologue: "「噓……用冰冷空洞的眼眶，去記錄、去洞察這場無聊的戰爭吧。\n\n你用堅硬龜裂的石像面皮，將自己與充滿情感波動的世界徹底隔絕。你以為只要掌握了足夠的知識，就能不受傷害？Beast Queen 欣賞你這毫無溫度的智慧。\n\n戴上這張『裂紋石語面具』。它將使你免受任何情緒的干擾。在永恆的冷靜中，去解剖人性、去破解 Chrestar 的魔力源泉。你不需要朋友，因為真理，就是用來構築你智慧王國的基石。」"
+            },
+            "6": {
+                enneagram: "第 6 型 — 忠誠者 (Loyalist)",
+                title: "誓約鐵衛面具 (Sentinel Winged Mask)",
+                image: "IMG_3320_3.jpg",
+                essence: "防備懷疑、強烈歸屬感、用鐵甲與誓約對抗未知的危機。",
+                compatibility: "【命運盟友】：秩序之角 (Type 1) | 【宿敵】：深淵觸流 (Type 9)",
+                color: "text-teal-400 glow-purple",
+                accent: "rgba(45, 212, 191, 0.4)",
+                monologue: "「可憐的小傢伙，你一邊在鋼鐵頭盔後瑟瑟發抖，一邊卻又要逞強守護隊伍的後方。\n\n你的內心充斥著懷疑：『上級是指揮失誤嗎？隊友真的不會背叛我嗎？』你用最沉重的武裝和誓約，試圖消除內心對未知的恐慌。但在這片深淵中，唯有臣服於我，才是你最絕對的安全感。\n\n戴上這張『誓約鐵衛面具』，這沉重的鐵羽將阻斷你所有的不安。加入我的軍團，你不再需要無休止地猜忌與防備。我，就是你永不背叛的終極依歸！」"
+            },
+            "7": {
+                enneagram: "第 7 型 — 活躍者 (Enthusiast)",
+                title: "森羅幻夢面具 (Forest Leafy Mask)",
+                image: "IMG_3319_3.jpg",
+                essence: "追求享樂、逃避痛苦、在荊棘與森林幻夢中奔向狂野自在。",
+                compatibility: "【命運盟友】：霸王熔岩 (Type 8) | 【宿敵】：秩序之角 (Type 1)",
+                color: "text-lime-500 glow-green",
+                accent: "rgba(132, 204, 22, 0.4)",
+                monologue: "「呵呵，你在笑？哪怕防線崩塌，你也想在落葉與魔力幽光中跳舞、逃離現實的沈重。\n\n你抗拒被規則鎖死，抗拒去凝視靈魂最深處的痛苦。你用滿頭綠葉與樹木的歡愉偽裝自己，不斷尋求新鮮與刺激。但你逃不掉的，親愛的，逃避只會讓你更空虛。\n\n戴上這張『森羅幻夢面具』。讓木質的魔力在你的血管中扎根。釋放你內心最瘋狂、最野蠻的獸性！這片焦黑的森林，將成為你最盛大的奇幻遊樂園！」"
+            },
+            "8": {
+                enneagram: "第 8 型 — 挑戰者 (Challenger)",
+                title: "霸王熔岩面具 (Magma Crown Skull Mask)",
+                image: "custom_generated_8",
+                essence: "霸道強勢、直接控制、摧毀虛偽守衛秩序的火山霸權。",
+                compatibility: "【命運盟友】：森羅幻夢 (Type 7) | 【宿敵】：幽藍晶刺 (Type 2)",
+                color: "text-red-500 glow-crimson",
+                accent: "rgba(239, 68, 68, 0.4)",
+                monologue: "「對！就是這種眼神！狂傲、暴烈、不屈！\n\nChrestar 那些懦弱的元老們，只懂得在城堡裡顫抖，唯有你敢挺起胸膛去撕碎一切枷鎖。你絕不容許任何人掌控你、踩在你的頭頂。那就用力量，來決定誰才是這個世界的主宰！\n\n這具『霸王熔岩面具』是火山黑曜石的王冠。戴上它！讓熔岩沸騰你的意志。率領我的野獸大軍，去踐踏那些虛偽的光明教條，將膽敢阻擋你的一切，統統熔煉成你的王座基石！」"
+            },
+            "9": {
+                enneagram: "第 9 型 — 和平者 (Peacemaker)",
+                title: "深淵觸流面具 (Oceanic Tentacle Mask)",
+                image: "IMG_3324_3.jpg",
+                essence: "逆來順受、消極抵抗、如深海之潮般吞噬所有衝突的靜謐。",
+                compatibility: "【命運盟友】：幽藍晶刺 (Type 2) | 【宿敵】：誓約鐵衛 (Type 6)",
+                color: "text-cyan-500 glow-purple",
+                accent: "rgba(6, 182, 212, 0.4)",
+                monologue: "「多麼溫順的孩子。你最討厭紛爭，甘願像深海的水流，隨波逐流、逆來順受。\n\n你為了附和他人，不斷壓抑自己的存在，以為不爭執就是和平。但在這場慘烈的 Chrestar 戰役中，你的消極抵抗只會讓深淵黑潮越漫越深。既然不想做出抉擇，那就徹底融化吧。\n\n戴上這張『深淵觸流面具』。讓深海觸手般的黑霧纏繞你的面龐。別再掙扎了，沉入海底，與我的黑暗徹底同化。在永恆的靜謐與無聲中，享受再也沒有痛苦與爭端的最極致和平……」"
+            }
+        };
+
+        let currentQuestionIdx = 0;
+        let scores = { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0 };
+
+        // Robust dual-loading strategy: tries direct loading, tries relative path, then falls back to custom high-res SVG
+        function handleImageError(imgEl, originalSrc, type) {
+            // If we haven't tried relative path yet, try it now
+            if (!imgEl.getAttribute('data-tried-relative')) {
+                imgEl.setAttribute('data-tried-relative', 'true');
+                imgEl.src = './' + originalSrc;
+            } else {
+                // Both failed, hide image and show custom fallback SVG
+                imgEl.style.display = 'none';
+                const fallbackContainer = document.getElementById('fallback-svg-' + type);
+                if (fallbackContainer) {
+                    fallbackContainer.classList.remove('hidden');
+                }
+            }
+        }
+
+        function startQuiz() {
+            if (!isAudioPlaying) {
+                toggleAudio(); // Start sound automatically to lock the gothic vibes
+            }
+            playClickSound();
+
+            const landingView = document.getElementById('view-landing');
+            const quizView = document.getElementById('view-quiz');
+
+            landingView.style.opacity = '0';
+            landingView.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                landingView.classList.add('hidden');
+                quizView.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    quizView.style.opacity = '1';
+                    quizView.style.transform = 'scale(1)';
+                    renderQuestion();
+                }, 50);
+            }, 500);
+        }
+
+        function renderQuestion() {
+            const questionData = questions[currentQuestionIdx];
+            
+            document.getElementById('quiz-progress').textContent = `Q ${currentQuestionIdx + 1} / ${questions.length}`;
+            const percent = ((currentQuestionIdx + 1) / questions.length) * 100;
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+
+            document.getElementById('quiz-question').innerHTML = `<span class="text-pink-400">【場景 ${currentQuestionIdx + 1}】</span> ${questionData.q}`;
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            // Render each quiz option button with modern interaction states
+            questionData.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-neutral-900/40 hover:bg-pink-950/20 active:bg-pink-950/40 border border-purple-950/40 hover:border-pink-500/50 rounded-xl p-4 text-xs md:text-sm text-gray-300 hover:text-white transition-all duration-300 transform hover:translate-x-1 flex gap-3.5 items-start select-none group";
+                
+                const indicator = document.createElement('span');
+                indicator.className = "flex-shrink-0 w-5 h-5 rounded-full border border-purple-800 group-hover:border-pink-500 flex items-center justify-center text-[10px] font-cinzel text-purple-400 group-hover:text-pink-400 transition-colors mt-0.5";
+                indicator.textContent = String.fromCharCode(65 + idx);
+
+                const label = document.createElement('span');
+                label.className = "flex-grow leading-relaxed font-light text-gray-300 group-hover:text-pink-100";
+                label.textContent = opt.t;
+
+                btn.appendChild(indicator);
+                btn.appendChild(label);
+
+                btn.onclick = () => selectOption(opt.v);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(val) {
+            playClickSound();
+            scores[val] += 2; // Core dominant type weight
+
+            // Distribute wing weights
+            const currentInt = parseInt(val);
+            let wingLeft = (currentInt === 1) ? 9 : currentInt - 1;
+            let wingRight = (currentInt === 9) ? 1 : currentInt + 1;
+            scores[wingLeft.toString()] += 0.5;
+            scores[wingRight.toString()] += 0.5;
+
+            const quizView = document.getElementById('view-quiz');
+            quizView.style.opacity = '0';
+            quizView.style.transform = 'scale(0.98)';
+
+            setTimeout(() => {
+                currentQuestionIdx++;
+                if (currentQuestionIdx < questions.length) {
+                    renderQuestion();
+                    quizView.style.opacity = '1';
+                    quizView.style.transform = 'scale(1)';
+                } else {
+                    quizView.classList.add('hidden');
+                    startFittingTransition();
+                }
+            }, 300);
+        }
+
+        function startFittingTransition() {
+            const fittingView = document.getElementById('view-fitting');
+            fittingView.classList.remove('hidden');
+
+            setTimeout(() => {
+                fittingView.style.opacity = '1';
+                fittingView.style.transform = 'scale(1)';
+            }, 50);
+
+            const messages = [
+                "「正在以暗之印刻感應你的精神能量……」",
+                "「正在撕開你作為 Chrestar 護衛的虛偽盔甲……」",
+                "「野獸之血在你的脈搏中與九型星盤產生共鳴！」",
+                "「別抗拒，閉上雙眼……Beast Queen 正親手將面具扣下！」"
+            ];
+            
+            let msgIdx = 0;
+            const subtextEl = document.getElementById('fitting-subtext');
+            
+            const messageInterval = setInterval(() => {
+                if (msgIdx < messages.length) {
+                    subtextEl.style.opacity = '0';
+                    setTimeout(() => {
+                        subtextEl.textContent = messages[msgIdx];
+                        subtextEl.style.opacity = '1';
+                        msgIdx++;
+                        playHeartbeat();
+                    }, 300);
+                } else {
+                    clearInterval(messageInterval);
+                }
+            }, 1200);
+
+            // Animate dark silhouette coming close
+            const maskContainer = document.getElementById('fitting-mask-container');
+            setTimeout(() => {
+                maskContainer.style.opacity = '1';
+                maskContainer.style.transform = 'translateY(0px) scale(1)';
+            }, 100);
+
+            const dominantType = getDominantType();
+
+            // Transition delay
+            setTimeout(() => {
+                playRevealSound();
+                document.body.classList.add('glitch-effect');
+                setTimeout(() => {
+                    document.body.classList.remove('glitch-effect');
+                    revealResult(dominantType);
+                }, 400);
+            }, 5800);
+        }
+
+        function getDominantType() {
+            let maxVal = -1;
+            let dominant = "9";
+            for (let type in scores) {
+                if (scores[type] > maxVal) {
+                    maxVal = scores[type];
+                    dominant = type;
+                }
+            }
+            return dominant;
+        }
+
+        function revealResult(type) {
+            const fittingView = document.getElementById('view-fitting');
+            const resultView = document.getElementById('view-result');
+            const profile = maskProfiles[type];
+
+            fittingView.classList.add('hidden');
+            resultView.classList.remove('hidden');
+
+            const maskRenderContainer = document.getElementById('result-mask-render');
+            
+            // Clean container
+            maskRenderContainer.innerHTML = '';
+
+            if (type === "4" || type === "8") {
+                // Render procedural high quality SVG directly
+                maskRenderContainer.innerHTML = customMaskSVGs[type];
+            } else {
+                // Render asset image with robust, progressive dual fallback
+                const fallbackSvg = customMaskSVGs[type] || '';
+                maskRenderContainer.innerHTML = `
+                    <div class="relative w-full h-full flex items-center justify-center">
+                        <img id="mask-img-${type}" src="${profile.image}" alt="${profile.title}" 
+                             class="w-full h-full object-contain rounded-xl drop-shadow-[0_0_15px_${profile.accent}] transition-opacity duration-300 opacity-0"
+                             onload="this.classList.remove('opacity-0'); document.getElementById('fallback-svg-${type}').style.display='none';"
+                             onerror="handleImageError(this, '${profile.image}', '${type}')">
+                        <div id="fallback-svg-${type}" class="absolute inset-0 w-full h-full flex items-center justify-center">
+                            ${fallbackSvg}
+                        </div>
+                    </div>`;
+                
+                // Trigger load immediately
+                const img = document.getElementById(`mask-img-${type}`);
+                if (img && img.complete && img.naturalWidth !== 0) {
+                    img.classList.remove('opacity-0');
+                    const fb = document.getElementById(`fallback-svg-${type}`);
+                    if (fb) fb.style.display = 'none';
+                }
+            }
+
+            document.getElementById('result-enneagram').textContent = profile.enneagram;
+            document.getElementById('result-title').textContent = profile.title;
+            document.getElementById('result-title').className = `font-cinzel text-xl md:text-2xl font-black tracking-widest mt-2 mb-1 ${profile.color}`;
+            document.getElementById('result-monologue').innerHTML = profile.monologue.replace(/\n/g, '<br>');
+            document.getElementById('result-essence').textContent = profile.essence;
+            document.getElementById('result-compatibility').textContent = profile.compatibility;
+
+            document.getElementById('result-glow').style.backgroundColor = profile.accent;
+
+            setTimeout(() => {
+                resultView.style.opacity = '1';
+                resultView.style.transform = 'scale(1)';
+            }, 50);
+        }
+
+        function toggleGallery() {
+            playClickSound();
+            const gallery = document.getElementById('view-gallery');
+            if (gallery.classList.contains('hidden')) {
+                const grid = document.getElementById('gallery-grid');
+                grid.innerHTML = '';
+                
+                for (let type in maskProfiles) {
+                    const prof = maskProfiles[type];
+                    const card = document.createElement('div');
+                    card.className = "bg-neutral-900/60 border border-purple-950/80 rounded-xl p-4 flex flex-col items-center text-center hover:border-pink-500/50 transition-all duration-300";
+                    
+                    let imageSnippet = '';
+                    if (type === "4" || type === "8") {
+                        imageSnippet = `<div class="w-24 h-24 mb-3 flex items-center justify-center">${customMaskSVGs[type]}</div>`;
+                    } else {
+                        const fallbackSvg = customMaskSVGs[type] || '';
+                        imageSnippet = `
+                            <div class="w-24 h-24 mb-3 relative flex items-center justify-center">
+                                <img id="gal-img-${type}" src="${prof.image}" alt="${prof.title}" 
+                                     class="w-full h-full object-contain rounded drop-shadow-[0_0_8px_${prof.accent}] transition-opacity duration-300 opacity-0"
+                                     onload="this.classList.remove('opacity-0'); document.getElementById('gal-fallback-${type}').style.display='none';"
+                                     onerror="handleImageError(this, '${prof.image}', 'gal-${type}')">
+                                <div id="gal-fallback-${type}" class="absolute inset-0 w-full h-full flex items-center justify-center">
+                                    ${fallbackSvg}
+                                </div>
+                            </div>`;
+                    }
+
+                    card.innerHTML = `
+                        ${imageSnippet}
+                        <span class="text-[9px] text-pink-400 font-cinzel font-semibold tracking-wider">${prof.enneagram}</span>
+                        <h4 class="font-cinzel text-xs font-bold text-gray-200 mt-1 mb-2">${prof.title}</h4>
+                        <p class="text-[10px] text-gray-400 leading-relaxed font-light">${prof.essence}</p>
+                    `;
+                    grid.appendChild(card);
+                    
+                    // Force complete check for cached loads
+                    if (type !== "4" && type !== "8") {
+                        const galImg = document.getElementById(`gal-img-${type}`);
+                        if (galImg && galImg.complete && galImg.naturalWidth !== 0) {
+                            galImg.classList.remove('opacity-0');
+                            const galFb = document.getElementById(`gal-fallback-${type}`);
+                            if (galFb) galFb.style.display = 'none';
+                        }
+                    }
+                }
+                
+                gallery.classList.remove('hidden');
+            } else {
+                gallery.classList.add('hidden');
+            }
+        }
+
+        function copyResult() {
+            const enneagram = document.getElementById('result-enneagram').textContent.trim();
+            const title = document.getElementById('result-title').textContent.trim();
+            const monologue = document.getElementById('result-monologue').innerText.trim();
+            const textToCopy = `【Chrestar 靈魂加冕：我戴上了 Beast Queen 的面具】\n\n九型人格對應：${enneagram}\n獲得魔面：${title}\n\n「野獸女王的評語：」\n${monologue}\n\n立即前去接受野獸女王的加冕試煉！`;
+
+            const tempInput = document.createElement("textarea");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast();
+                } else {
+                    console.error("Unable to copy result");
+                }
+            } catch (err) {
+                console.error("Error copying text: ", err);
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.style.opacity = '1';
+            toast.style.transform = 'translate(-50%, -10px)';
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translate(-50%, 8px)';
+            }, 2500);
+        }
+
+        function resetQuiz() {
+            playClickSound();
+            currentQuestionIdx = 0;
+            scores = { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0 };
+
+            const resultView = document.getElementById('view-result');
+            const landingView = document.getElementById('view-landing');
+
+            resultView.style.opacity = '0';
+            resultView.style.transform = 'scale(0.95)';
+
+            setTimeout(() => {
+                resultView.classList.add('hidden');
+                landingView.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    landingView.style.opacity = '1';
+                    landingView.style.transform = 'scale(1)';
+                }, 50);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
